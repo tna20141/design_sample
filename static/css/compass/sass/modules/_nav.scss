@@ -1,0 +1,125 @@
+$nav__bg_color: #F0F0F0;
+
+.nav__brand {
+	@extend .comp__brand;
+	padding-top: 16px;
+	font-size: 26px;
+}
+
+.nav__shadow {
+	box-shadow: 0 0.07em 0.14em rgba(0,0,0,0.4);
+}
+
+.nav__wrapper {
+	width: 100%;
+	padding: 0px 10px;
+	background-color: $nav__bg_color;
+}
+
+.nav__item {
+	text-align: center;
+	font-family: 'Trirong', serif;
+	font-size: 18px;
+}
+
+.nav__logo {
+	font-size: 18px;
+	width: 2em;
+	height: 2em;
+	margin-right: 0.24em;
+	padding-bottom: 0.24em;
+}
+
+.nav__dropdown-item {
+	@extend .nav__item;
+	background-color: $nav__bg_color;
+}
+
+.nav__collapse-button {
+	border: 0;
+}
+
+@include for-tablet-landscape-up {
+
+	.nav__dropdown {
+		width: 10em;
+	}
+
+	.nav__arrowup {
+		position:relative;
+		background-color: #d5d5d5;
+	}
+
+	.nav__arrowup:after {
+		font-size: 20px;
+		content: '';
+		position: absolute;
+		left: 50%;
+		bottom: 100%;
+		margin-left: -10px;
+		width: 0;
+		height: 0;
+		border-left: 0.6em solid transparent;
+		border-right: 0.6em solid transparent;
+		border-bottom: 0.6em solid #d5d5d5;
+	}
+
+	// trigger opening dropdown menu when hovering over it
+	.nav__dropdown:hover > ul.dropdown-menu {
+		display: block;
+	}
+
+	// add a bit padding to navbar items
+	li.nav__item > a {
+		padding-top: 20px !important;
+		padding-bottom: 23px !important;
+	}
+
+	// adding padding to the right most item of the navbar
+	nav ul.navbar-nav > li:last-child {
+		// if there's no obvious reference point to scale, use absolute value
+		padding-right: 20px;
+	}
+
+	// make divider practically invisible on large screen
+	.dropdown-menu .divider {
+		margin: 0;
+	}
+}
+
+@include for-desktop-up {
+
+	.nav__wrapper {
+		padding: 0px 80px;
+	}
+
+	.nav__item {
+		padding: 0 1em;
+	}
+
+	.nav__dropdown-item {
+		padding: 0;
+		width: 10em;
+	}
+}
+
+@include for-tablet-portrait-down {
+	.nav__collapse-button {
+		padding-top: 17px;
+		padding-bottom: 17px;
+	}
+
+	.nav__item > a {
+		text-align: left;
+	}
+}
+
+// override bootstrap's collapse button effect
+.navbar-default .nav__collapse-button:hover, .navbar-default .nav__collapse-button:focus {
+	background-color: transparent;
+}
+
+// remove the padding from the bootstrap class, as it messes up the positioning
+.dropdown-menu {
+	padding: 0px;
+}

@@ -1,0 +1,54 @@
+{% load static %}
+
+{% load cache %}
+{% cache 86400 navbar %}
+
+<nav id="nav_wrapper" class="navbar navbar-default navbar-fixed-top nav__shadow">
+	<div class="navbar-wrapper nav__wrapper">
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed nav__collapse-button" data-toggle="collapse" data-target="#nav_menu" aria-expanded="false">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/" class="nav__brand navbar-brand">
+				<span style="height: 100%;" alt="Brand">
+					<img src="{% static "images/logo_64x64.jpg" %}" class="nav__logo" />
+					<span>558 Design</span>
+				</span>
+			</a>
+		</div>
+		<div id="nav_menu" class="collapse navbar-collapse nav__menu">
+			<ul class="nav navbar-nav navbar-right">
+				<li class="nav__item">
+					<a href="/#about">About</a>
+				</li>
+				<li class="nav__item">
+					<a href="/#contact">Contact</a>
+				</li>
+				<li class="dropdown nav__dropdown nav__item">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Products</a>
+					<ul class="dropdown-menu">
+						<li><div class="nav__arrowup" /></li>
+						<li role="separator" class="divider"></li>
+					{% for category in CATEGORIES %}
+						<li class="nav__dropdown-item">
+							<a href="{% url "designs:category_view" category.id %}">{{ category.name }}</a>
+						</li>
+					{% endfor %}
+				</li>
+			</ul>
+		</div>
+	</div>
+</nav>
+
+<script>
+
+$script.ready('loadcss', function() {
+	loadCSS('https://fonts.googleapis.com/css?family=Geostar|Cormorant+Unicase');
+});
+
+</script>
+
+{% endcache %}

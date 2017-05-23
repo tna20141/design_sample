@@ -1,0 +1,18 @@
+<footer class="footer__wrapper">
+	<div class="footer__iconlist">
+		<a href="mailto:info.558design@gmail.com" class="fa fa-envelope-o footer__icon"></a>
+		<a href="https://www.facebook.com/558Design" target="_blank" class="fa fa-facebook footer__icon"></a>
+	</div>
+</footer>
+
+<script>
+
+$script.ready('jquery', function() {
+	$('footer div').hover(function() {
+		$(this).children().css('background-color', 'gray');
+	}, function() {
+		$(this).children().css('background-color', 'white');
+	});
+});
+
+</script>

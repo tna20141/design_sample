@@ -1,0 +1,41 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>{% block title %}Design Sample{% endblock %}</title>
+		<meta name="description" content="" />
+		<meta name="author" content="" />
+
+		{% block js %}
+		{# use headjs to dynamically load all js files #}
+		<script src="{% static "vendors/script.js" %}"></script>
+		<script>
+				{% block js-dynamic %}
+				$script('{% static "vendors/jquery-3.2.1.min.js" %}', 'jquery');
+				$script('{% static "vendors/loadCSS.js" %}', 'loadcss');
+				$script.ready('jquery', function() {
+					$script('{% static "vendors/bootstrap/js/bootstrap.min.js" %}', 'bootstrap');
+				});
+				{% endblock js-dynamic %}
+		</script>
+		{% endblock js %}
+
+		{% block style %}
+		<link rel="stylesheet" type="text/css" href="{% static "vendors/bootstrap/css/bootstrap.min.css" %}" />
+		{# <link rel="stylesheet" type="text/css" href="{% static "vendors/bootstrap/css/bootstrap-theme.min.css" %}" /> #}
+		<link rel="stylesheet" type="text/css" href="{% static "vendors/font-awesome-4.7.0/css/font-awesome.min.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}" />
+		{% endblock style %}
+
+		{% block other_links %}
+		<link rel="shortcut icon" type="image/jpeg" href="{% static "images/logo_64x64.jpg" %}" />
+		{% endblock other_links %}
+	</head>
+
+	<body>
+		{% block main_content %}
+		{% endblock main_content %}
+	</body>
+</html>

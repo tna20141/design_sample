@@ -1,0 +1,14 @@
+{% extends "base_minimal.html" %}
+
+{% block main_content %}
+
+	{% include "navbar.html" with content_id=wrapper_id %}
+
+	<div id="content_wrapper" class="content__wrapper">
+		{% block content %}
+		{% endblock content %}
+	</div>
+
+	{% include "footer.html" %}
+
+{% endblock main_content %}

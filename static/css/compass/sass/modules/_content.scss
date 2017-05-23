@@ -1,0 +1,5 @@
+.content__wrapper {
+	// padding to avoid overlay with navbar
+	// this is hard-coding, but it has better performance
+	padding-top: 64px;
+}

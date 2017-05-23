@@ -1,0 +1,22 @@
+.footer__wrapper {
+	text-align: center;
+	background-color: black;
+	height: 120px;
+	position: relative;
+}
+
+.footer__iconlist {
+	position: absolute;
+	top: 60%;
+	left: 50%;
+	transform: translate(-50%, -60%);
+}
+
+.footer__icon {
+	@extend .comp__icon;
+	font-size: 20px;
+	background-color: $__icon_bg_color;
+	border-radius: 50%;
+	height: 2em;
+	width: 2em;
+}

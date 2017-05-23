@@ -1,0 +1,117 @@
+$contact__form_color: #2196d3;
+
+.contact__wrapper {
+	@extend .comp__margin;
+	text-align: center;
+}
+
+.contact__form-input {
+	border: none;
+	border-radius: 0;
+	background-color: transparent;
+	box-shadow: inset 0 -0.08em 0 #ddd;
+	padding: 0;
+	font-size: 1.2em;
+}
+
+.contact__form-input:focus {
+	box-shadow: inset 0 -0.14em 0 $contact__form_color;
+	transition-duration: 0.25s;
+	transition-timing-function: ease-out;
+}
+
+.contact__form-label {
+	padding-top: 0.8em;
+	font-weight: 500;
+	font-size: 1.2em;
+}
+
+.contact__form-required_mark {
+	color: red;
+}
+
+.contact__form-submit {
+	border: 0 none;
+	background: $contact__form_color;
+	text-transform: uppercase;
+	padding: 0.8em 1.5em;
+	letter-spacing: 0.08em;
+	font-weight: 500;
+	box-shadow: 0.1em 0.1em 0.05em 0.05em darken(#ddd, 20%);
+}
+
+.contact__form-submit:hover, .contact__form-submit:focus {
+	background: darken($contact__form_color, 5%);
+}
+
+.contact__form-submit:focus:active {
+	background: darken($contact__form_color, 15%);
+}
+
+.contact__addr-logo {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.contact__addr-brand {
+	@extend .comp__brand;
+	padding-top: 30px;
+	font-size: 30px;
+}
+
+.contact__addr-item {
+	font-family: 'Kanit', sans-serif;
+	color: #777;
+	font-size: 1.3em;
+}
+
+.contact__addr-group {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.contact__image {
+	max-width: 100%;
+	padding-bottom: 20px;
+	width: 70em;
+}
+
+.contact__icon {
+	@extend .comp__icon;
+	font-size: 17px;
+	height: 1.8em;
+	width: 1.8em;
+}
+
+.contact__iconlist {
+	position: absolute;
+	top: 10%;
+	left: 50%;
+	transform: translate(-50%, -10%);
+}
+
+.contact__icon-wrapper {
+	position: relative;
+	padding-bottom: 10px;
+}
+
+.contact__form-error {
+	border: none;
+	// overrides the normal box-shadow when focusing on the input again
+	box-shadow: inset 0 -0.14em 0 #e51c23 !important;
+}
+
+.contact__form-error-message {
+	color: red;
+}
+
+.contact__notification {
+	margin-top: 13px;
+	padding-left: 40px;
+	overflow: hidden;
+}
+
+.contact__notification-message {
+	margin-bottom: 0;
+	padding: 10px;
+}

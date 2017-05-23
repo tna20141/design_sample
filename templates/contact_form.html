@@ -1,0 +1,131 @@
+<form id="contact_form" role="form" data-toggle="validator" class="form text-left">
+	<div class="row">
+		<label class="label-control contact__form-label">Full name <span class="contact__form-required_mark">(*)</span></label>
+		<div class="row">
+			<div class="col-xs-6">
+				<div class="form-group has-feedback">
+					<input type="text" name="first_name" class="form-control last-name contact__form-input" placeholder="First name"/>
+					<div class="help-block with-errors contact__form-error-message"></div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="form-group has-feedback">
+					<input type="text" name="last_name" class="form-control first-name contact__form-input" placeholder="Last name"/>
+					<div class="help-block with-errors contact__form-error-message"></div>
+				</div>
+			</div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="label-control contact__form-label">Email <span class="contact__form-required_mark">(*)</span></label>
+			<input type="text" name="email" class="form-control email contact__form-input" placeholder="example@email.com"/>
+			<div class="help-block with-errors contact__form-error-message"></div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="label-control contact__form-label">Phone No. </label>
+			<input type="text" name="phone_no" class="form-control phone contact__form-input" placeholder="(+84) 912334568 / 0912334568" />
+			<div class="help-block with-errors contact__form-error-message"></div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="label-control contact__form-label">Title <span class="contact__form-required_mark">(*)</span></label>
+			<input type="text" name="title" class="form-control subject contact__form-input" placeholder="Title"/>
+			<div class="help-block with-errors contact__form-error-message"></div>
+		</div>
+		<div class="form-group has-feedback">
+			<label class="label-control contact__form-label">Body <span class="contact__form-required_mark">(*)</span></label>
+			<textarea name="content" class="form-control content contact__form-input" placeholder="Content..." rows="4"></textarea>
+			<div class="help-block with-errors contact__form-error-message"></div>
+		</div>
+		<div class="paddingtop20"></div>
+		<label class="label-control contact__form-label pull-left">
+			<button type="submit" class="btn btn-primary contact__form-submit" data-loading-text="Sending...">Submit</button>
+		</label>
+		<div class="contact__notification">
+			<div class="alert alert-success contact__notification-message hidden">Success!</div>
+			<div class="alert alert-danger contact__notification-message hidden">Failure!</div>
+		</div>
+	</div>
+</form>
+
+<script>
+
+$script.ready(['jquery', 'validate', 'main'], function() {
+	var constraints = {
+		first_name: {
+			presence: {
+				message: 'First name required'
+			},
+		},
+		last_name: {
+			presence: {
+				message: 'Last name required'
+			}
+		},
+		email: {
+			presence: {
+				message: 'Email required'
+			},
+			email: {
+				message: 'Must be email'
+			}
+		},
+		phone_no: {
+			format: {
+				pattern: '(\\(\\+84\\)\\ ?|0)\\d{9,10}',
+				message: 'Phone number must be in the correct format'
+			}
+		},
+		title: {
+			presence: {
+				message: 'Title required'
+			}
+		},
+		content: {
+			presence: {
+				message: 'Content required'
+			}
+		}
+	};
+
+	var form = $('#contact_form');
+	form.on('submit', function(event) {
+		event.preventDefault();
+
+		var submit = form.find('[type="submit"]');
+		var alert_success = form.find('.alert-success');
+		var alert_failure = form.find('.alert-danger');
+
+		alert_success.stop();
+		alert_failure.stop();
+		alert_success.addClass('hidden');
+		alert_failure.addClass('hidden');
+		clear_validation_errors(form);
+
+		var errors = validate(form, constraints, { fullMessages: false });
+		if (errors) {
+			return show_validation_errors(form, errors);
+		}
+
+		submit.button('loading');
+		var data = form.serialize();
+
+		$.post('/ajax/send_contact/', data).done(function() {
+
+		}).done(function() {
+			alert_success.removeClass('hidden');
+			alert_success.fadeTo("fast", 1).animate({ opacity: 1.0 }, 3000).fadeTo("slow", 0);
+		}).fail(function(response) {
+			var status_code = response.status;
+			if (status_code === 422) {
+				// validation failed
+				var validation_error = response.responseJSON;
+				show_validation_errors(form, validation_error);
+			} else {
+				alert_failure.removeClass('hidden');
+			}
+		}).always(function() {
+			submit.button('reset');
+		});
+	});
+});
+
+</script>

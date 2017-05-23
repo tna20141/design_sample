@@ -1,0 +1,11 @@
+hr {
+	@extend .comp__margin;
+	width: 100%;
+	color: #bbb;
+	height: 1px;
+	background-color: #bbb;
+}
+
+body {
+	background-color: #F0F0F0;
+}

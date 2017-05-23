@@ -1,0 +1,16 @@
+$base_font_size: 20px;
+
+.about__wrapper {
+	@extend .comp__margin;
+}
+
+.about__header {
+	color: #444444;
+	font-size: $base_font_size * 1.7;
+}
+
+.about__content {
+	color: #777;
+	font-size: $base_font_size;
+	line-height: 1.2em;
+}

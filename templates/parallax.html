@@ -1,0 +1,16 @@
+{% load static %}
+
+<div id="{{ id }}" class="parallax__wrapper" data-image="{% static image %}">
+	{# the position is calculated based on the top left corner, hence the additional transformation #}
+	<div class="parallax__content">
+		<h2 class="parallax__header">{{ title }}</h2>
+	</div>
+</div>
+
+<script>
+
+$script.ready(['jquery', 'imagescroll'], function() {
+	$('#{{ id }}').imageScroll({ coverRatio: 0.4, container: $('body') });
+});
+
+</script>

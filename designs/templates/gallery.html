@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block js-dynamic %}
+
+{{ block.super }}
+
+$script.ready('jquery', function() {
+	$script('{% static "vendors/masonry.pkgd.js" %}', 'masonry');
+	$script('{% static "vendors/imagesloaded.pkgd.js" %}', 'imagesloaded');
+	$script('{% static "vendors/lightgallery/js/lightgallery.js" %}', 'lightgallery');
+});
+
+$script.ready('lightgallery', function() {
+	$script([
+		'{% static "vendors/lightgallery/js/lg-thumbnail.js" %}',
+		'{% static "vendors/lightgallery/js/lg-fullscreen.js" %}'
+	], 'lightgallery-bundle');
+});
+
+{% endblock js-dynamic %}
+
+{% block style %}
+
+{{ block.super }}
+<link rel="stylesheet" type="text/css" href="{% static "vendors/lightgallery/css/lightgallery.css" %}" />
+
+{% endblock style %}
+
+{% block content %}
+
+<div id="gallery_wrapper" class="gallery__wrapper" align="center">
+	<div class="gallery__spinner"></div>
+{% for product in products %}
+	<div class="gallery__item">
+		<input type="hidden" value="{{ product.id }}" />
+		<div class="gallery__image" style="background-image: url('{{ product.thumb }}');"></div>
+		<h4 class="gallery__title">{{ product.description }}</h4>
+		<p class="gallery__content">Owner: {{ product.owner }}<p/>
+	</div>
+
+<script>
+
+$script.ready(['jquery', 'lightgallery-bundle'], function() {
+	var images = [];
+	var _temp;
+
+{% for image in product.files %}
+	_temp = {
+		src: '{{ image }}',
+		thumb: '{{ image }}'
+	};
+	images.push(_temp);
+{% endfor %}
+
+	var trigger = $('input[value="{{ product.id }}"]').closest('.gallery__item');
+	trigger.on('click', function() {
+		$(this).lightGallery({
+			showAfterLoad: false,
+			dynamic: true,
+			dynamicEl: images
+		});
+	});
+});
+
+</script>
+
+{% endfor %}
+
+</div>
+
+<script>
+
+$script.ready(['jquery', 'masonry', 'imagesloaded'], function() {
+	var gallery_wrapper = document.querySelector('#gallery_wrapper');
+	var spinner = $(gallery_wrapper).find('.gallery__spinner');
+
+{% if not products %}
+	spinner.remove();
+	return;
+{% endif %}
+
+	var m = new Masonry(gallery_wrapper, {
+		isInitLayout: false,
+		fitWidth: true,
+		columnWidth: 0
+	});
+	m._isLayoutInited = true;
+	m.layout();
+	$(gallery_wrapper).imagesLoaded({ background: '.gallery__image' }, function() {
+		m._init();
+	}).progress(function(instance, image) {
+		spinner.remove();
+		m.remove(spinner);
+	});
+});
+
+</script>
+
+{% endblock content %}

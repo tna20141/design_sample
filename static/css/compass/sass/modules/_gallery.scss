@@ -1,0 +1,55 @@
+$gallery__item_width: 235px;
+
+.gallery__wrapper {
+	padding-top: 20px;
+	position: relative;
+	margin: 0 auto;
+}
+
+.gallery__spinner {
+	margin: 0 auto;
+	border: 0.6em solid white;
+	border-top: 0.5em solid #555;
+	border-radius: 50%;
+	width: 3.5em;
+	height: 3.5em;
+	animation: spin 2s linear infinite;
+}
+
+.gallery__title {
+	font-family: 'Trirong', serif;
+	padding-left: 20px;
+	font-size: 1.15em;
+	word-wrap: break-word;
+	width: $gallery__item_width;
+	max-width: 80%;
+	margin-bottom: 0;
+	margin-top: 1.5em;
+}
+
+.gallery__content {
+	font-family: 'Trirong', serif;
+	font-size: 0.9em;
+	padding-left: 20px;
+	width: $gallery__item_width;
+	max-width: 80%;
+	margin-top: 0.5em;
+	margin-bottom: 2em;
+}
+
+.gallery__image {
+	width: $gallery__item_width;
+	height: $gallery__item_width * 1.5;
+	max-width: 80%;
+	margin: 1.6em;
+	overflow: hidden;
+	background-size: cover;
+	background-position: center center;
+	box-shadow: 0 0.2em 0.3em rgba(0,0,0,0.5);
+	transition: .6s all ease;
+}
+
+.gallery__image:hover {
+	box-shadow: 0 0.6em 1.2em rgba(0,0,0,0.7);
+	transform: scale(1.07);
+}

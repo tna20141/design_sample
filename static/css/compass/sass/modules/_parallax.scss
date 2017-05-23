@@ -1,0 +1,17 @@
+.parallax__wrapper {
+	position: relative;
+}
+
+.parallax__content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.parallax__header {
+	font-family: 'Kanit', sans-serif;
+	letter-spacing: 0.2em;
+	font-size: 3em;
+	color: #fff;
+}

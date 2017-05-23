@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block js-dynamic %}
+
+{{ block.super }}
+$script.ready('jquery', function() {
+	$script('{% static "vendors/jquery.imageScroll.js" %}', 'imagescroll');
+	$script('{% static "vendors/animatescroll.js" %}', 'animatescroll');
+	$script('{% static "js/main.js" %}', 'main');
+});
+$script('{% static "vendors/validate.js" %}', 'validate');
+
+{% endblock js-dynamic %}
+
+{% block content %}
+
+{% include "parallax.html" with id="about" title="About" image="images/background.jpg" %}
+
+<div id="about_wrapper" class="container about__wrapper">
+	<h3 class="about__header">Tư vấn thiết kế và thi công Nội thất - Ngoại thất</h3>
+	<hr />
+	<h5 class="about__content">558 Design hướng tới sự hoàn hảo nhưng vẫn giữ được những nét cá tính riêng của mỗi không gian. Với tiêu chí hướng tới giá trị cốt lõi, chúng tôi luôn nỗ lực hết mình để hiện thực hoá bản thiết kế mang đến sự hài lòng tuyệt đối cho khách hàng.</h5>
+	<h5 class="about__content">Được hình thành và phát triển từ những năm 2011, với sứ mệnh "Nâng Tầm Không Gian", chúng tôi đã tích lũy rất nhiều kinh nghiệm chuyên sâu trong các lĩnh vực:</h5>
+	<h5 class="about__content">- Tư vấn thiết kế nội thất, ngoại thất</h5>
+	<h5 class="about__content">- Thi công nội thất chuyên nghiệp</h5>
+	<h5 class="about__content">- Tư vấn thiết kế kiến trúc, quy hoạch.</h5>
+	<h5 class="about__content">- Xây dựng công trình dân dụng</h5>
+	<h5 class="about__content">Chúng tôi, với sứ mệnh "Nâng Tầm Không Gian" cam kết mang lại trải nghiệm tuyệt vời nhất cho chính không gian của bạn.</h5>
+	<hr />
+</div>
+
+{% include "parallax.html" with id="contact" title="Contact" image="images/background.jpg" %}
+
+<div id="contact_wrapper" class="container contact__wrapper">
+	<hr />
+	<img class="contact__image" src="{% static "images/contact.jpg" %}"/>
+	<div class="contact__icon-wrapper">
+		<div id="contact_iconlist" class="contact__iconlist">
+			<a href="mailto:info.558design@gmail.com" class="fa fa-envelope-o contact__icon"></a>
+			<a href="https://www.facebook.com/558Design" target="_blank" class="fa fa-facebook contact__icon"></a>
+		</div>
+	</div>
+	<hr />
+	<div class="row">
+		<div class="container">
+			<div class="col-xs-12 col-md-push-6 col-md-6">
+				{% include "contact_form.html" %}
+			</div>
+			<div class="col-xs-12 col-md-pull-6 col-md-6">
+				{% include "address.html" %}
+			</div>
+		</div>
+	</div>
+	<hr />
+		{% include "map.html" %}
+	<hr />
+</div>
+
+{% include "parallax.html" with id="thanks" title="Thank You" image="images/background.jpg" %}
+
+<script>
+
+$script.ready('jquery', function() {
+	$('#contact_iconlist').hover(function() {
+		$(this).children().css('color', 'gray');
+	}, function() {
+		$(this).children().css('color', 'black');
+	});
+});
+
+$script.ready('animatescroll', function() {
+	let target;
+	let hash = location.hash;
+
+	let smoothScrollTo = function(target) {
+		target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+		if (target.length) {
+			$(target).animatescroll({scrollSpeed: 1000});
+		}
+	}
+
+	if (hash) {
+		target = hash.split('#')[1];
+		smoothScrollTo($('#' + target));
+	} else {
+		smoothScrollTo($('body'));
+	}
+
+	// scroll to element on the same page
+	$('a[href*="#"]:not([href="#"])').click(function(e) {
+		if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+			smoothScrollTo($(this.hash));
+			return false;
+		}
+	});
+});
+
+</script>
+
+{% endblock content %}
+
